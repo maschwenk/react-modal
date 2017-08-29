@@ -8,7 +8,7 @@ import SafeHTMLElement from '../helpers/safeHTMLElement';
 export const portalClassName = 'ReactModalPortal';
 export const bodyOpenClassName = 'ReactModal__Body--open';
 
-const renderSubtreeIntoContainer = ReactDOM.unstable_renderSubtreeIntoContainer;
+const createPortal = ReactDOM.unstable_createPortal;
 
 function getParentElement(parentSelector) {
   return parentSelector();
@@ -153,9 +153,9 @@ export default class Modal extends Component {
   }
 
   renderPortal = props => {
-    this.portal = renderSubtreeIntoContainer(this, (
+    this.portal = createPortal(
       <ModalPortal defaultStyles={Modal.defaultStyles} {...props} />
-    ), this.node);
+    , this.node);
   }
 
   render() {
